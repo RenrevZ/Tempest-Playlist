@@ -26,7 +26,7 @@ export default{
         const submitForm = async () =>  {
             const response = await login(email.value,password.value)
             if(!error.value){
-                console.log('wrong credentials');
+                console.log('user logged in');
             }
         }
         console.log(email.value)
