@@ -20,19 +20,22 @@
   </template>
 
   <script>
-import { ref } from '@vue/reactivity'
-import Signup from '@/composables/Signup'
+  import { ref } from '@vue/reactivity'
+  import Signup from '@/composables/Signup'
+  import { useRouter } from 'vue-router'
+
   export default{
     setup() {
         const {error, signup ,isLoading} = Signup()
         const email = ref('')
         const password = ref('')
         const username = ref('')
+        const router = useRouter()
 
         const submitForm = async () => {
             const res = await signup(email.value,password.value,username.value)
             if(!error.value){
-                console.log('userSignedup')
+                router.push({name:'Index'})
             }
         }
 

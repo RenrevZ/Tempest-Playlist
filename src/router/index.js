@@ -1,6 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import { projectAuth } from '@/firebase/config'
+
+const requireAuth = (to,from,next) => {
+  let user = projectAuth.currentUser
+
+  if(!user){
+    next({name:'login'})
+  }else{
+    next()
+  }
+}
 const routes = [
   {
     path: '/',
@@ -20,12 +31,14 @@ const routes = [
   {
     path: '/playlist/create',
     name: 'Createplaylist',
-    component:  () => import('@/views/playlist/Create')
+    component:  () => import('@/views/playlist/Create'),
+    beforeEnter: requireAuth
   },
   {
     path: '/index',
     name: 'Index',
-    component:  () => import('@/views/playlist/index')
+    component:  () => import('@/views/playlist/index'),
+    beforeEnter: requireAuth
   }
 ]
 

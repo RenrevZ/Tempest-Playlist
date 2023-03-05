@@ -4,9 +4,19 @@
         <img src="@/assets/img/de11579517e467cd83793e0ec8c358e1.png" alt="">
         <h1><router-link :to="{name:'home'}">Rimiru Playlist</router-link></h1>
         <div class="links">
-           <button @click="userLogout" v-if="user">Logout</button>
-           <router-link class="btn" :to="{name:'signup'}" v-if="!user">Signup</router-link>
-           <router-link class="btn" :to="{name:'login'}" v-if="!user">Login</router-link>
+
+          <div v-if="user">
+            <button @click="userLogout" >Logout</button>
+            <router-link :to="{name:'Createplaylist'}">
+              Create Playlist
+            </router-link>
+          </div>
+
+           <div v-else>
+            <router-link class="btn" :to="{name:'signup'}" v-if="!user">Signup</router-link>
+            <router-link class="btn" :to="{name:'login'}" v-if="!user">Login</router-link>
+           </div>
+
         </div>
     </nav>
   </div>

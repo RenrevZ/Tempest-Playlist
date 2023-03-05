@@ -17,16 +17,18 @@
 <script>
     import Login from '@/composables/Login'
     import { ref } from '@vue/reactivity'
+import { useRouter } from 'vue-router'
 export default{
     setup(){
         const {error,login,isLoading} = Login()
         const email = ref('')
         const password = ref('')
+        const router = useRouter()
 
         const submitForm = async () =>  {
             const response = await login(email.value,password.value)
             if(!error.value){
-                console.log('user logged in');
+                router.push({name:'Index'})
             }
         }
         console.log(email.value)

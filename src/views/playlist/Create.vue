@@ -27,12 +27,14 @@ import Storage from '@/composables/Storage'
 import useData from '@/composables/useData'
 import getUser from '@/composables/getUser'
 import { timestamp } from '@/firebase/config'
+import { useRouter } from 'vue-router'
 
 export default {
     setup(){
         const {url,filePath,uploadImage} = Storage()
         const {error,addDoc} = useData('playlist')
         const { user } = getUser()
+        const router = useRouter()
 
         const title = ref('')
         const description = ref('')
@@ -59,6 +61,7 @@ export default {
 
                if(!error.value){
                  console.log('playlist added')
+                 router.push({name:'Index'})
                }
             }
         }
