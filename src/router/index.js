@@ -21,6 +21,11 @@ const routes = [
     path: '/playlist/create',
     name: 'Createplaylist',
     component:  () => import('@/views/playlist/Create')
+  },
+  {
+    path: '/index',
+    name: 'Index',
+    component:  () => import('@/views/playlist/index')
   }
 ]
 
