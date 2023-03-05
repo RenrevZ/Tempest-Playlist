@@ -15,13 +15,14 @@ const Storage = () => {
 
         try{
           const response = await storageRef.put(file)
+          url.value = await response.ref.getDownloadURL()
         }catch(err){
             console.log(err.message)
             error.value = err.message
         }
     }
 
-    return {url,filePath,error}
+    return {url,filePath,error, uploadImage}
 }
 
 export default Storage

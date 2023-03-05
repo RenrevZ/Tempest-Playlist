@@ -16,22 +16,50 @@
     <div class="error">{{ fileError }}</div>
     
     <small class="error"></small>
-    <button>Create Playlist</button>
+    <button v-if="!isLoading">Create Playlist</button>
+    <button v-else disabled>Creating...</button>
   </form>
 </template>
 
 <script>
 import { ref } from 'vue'
+import Storage from '@/composables/Storage'
+import useData from '@/composables/useData'
+import getUser from '@/composables/getUser'
+import { timestamp } from '@/firebase/config'
+
 export default {
     setup(){
+        const {url,filePath,uploadImage} = Storage()
+        const {error,addDoc} = useData('playlist')
+        const { user } = getUser()
+
         const title = ref('')
         const description = ref('')
         const file = ref(null)
         const fileError = ref(null)
+        const isLoading = ref(false)
 
-        const CreatePlaylist = () => {
+        const CreatePlaylist = async () => {
             if(file.value){
-                console.log(title.value,description.value)
+                isLoading.value = true
+               await uploadImage(file.value)
+               await addDoc({
+                 title: title.value,
+                 description: description.value,
+                 userId:user.value.uid,
+                 userName: user.value.displayName,
+                 coverUrl:url.value,
+                 filePath: filePath.value,
+                 songs:[],
+                 createdAt: timestamp()
+               })
+
+               isLoading.value = false
+
+               if(!error.value){
+                 console.log('playlist added')
+               }
             }
         }
 
@@ -49,7 +77,14 @@ export default {
             }
         } 
 
-        return {title,description,CreatePlaylist,UploadCover,fileError}
+        return {
+                title,
+                description,
+                CreatePlaylist,
+                UploadCover,
+                fileError,
+                isLoading
+            }
     }
 }
 </script>
