@@ -1,7 +1,7 @@
 import { ref, watchEffect } from 'vue'
 import { projectFirestore } from '../firebase/config'
 
-const getData = (collection) => {
+const getData = (collection,where) => {
 
   const documents = ref(null)
   const error = ref(null)
@@ -9,6 +9,10 @@ const getData = (collection) => {
   // register the firestore collection reference
   let collectionRef = projectFirestore.collection(collection)
     .orderBy('createdAt')
+
+  if(where){
+    collectionRef = collectionRef.where(...where)
+  }
 
   const unsub = collectionRef.onSnapshot(snap => {
     let results = []

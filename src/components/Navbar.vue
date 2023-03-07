@@ -6,10 +6,19 @@
         <div class="links">
 
           <div v-if="user">
-            <button @click="userLogout" >Logout</button>
+            <router-link :to="{name:'Index'}">
+              Playlist
+            </router-link>
+
             <router-link :to="{name:'Createplaylist'}">
               Create Playlist
             </router-link>
+
+            <router-link :to="{name:'UserPlaylist'}">
+              My Playlist
+            </router-link>
+            
+            <button @click="userLogout" >Logout</button>
           </div>
 
            <div v-else>

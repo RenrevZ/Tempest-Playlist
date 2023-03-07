@@ -46,6 +46,12 @@ const routes = [
     component:  () => import('@/views/playlist/Show'),
     beforeEnter: requireAuth,
     props: true
+  },
+  {
+    path: '/playlist/user',
+    name: 'UserPlaylist',
+    component:  () => import('@/views/UserPlaylist'),
+    beforeEnter: requireAuth
   }
 ]
 
