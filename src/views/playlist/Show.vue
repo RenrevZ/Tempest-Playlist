@@ -8,7 +8,7 @@
             <h2>{{ playlist.title }}</h2>
             <small>Created by {{ playlist.userName }}</small>
             <p>{{ playlist.description }}</p>
-            <button v-if="ownership">Delete Playlist</button>
+            <button v-if="ownership" @click="deletePlaylist">Delete Playlist</button>
         </div>
 
          <div class="song-list">
@@ -16,7 +16,7 @@
               <div v-for="song in playlist.songs" :key="song.id" class="single-song">
                   <h3>{{ song.title }}</h3>
                   <small>{{ song.artist }}</small>
-                  <button v-if="ownership">Delete</button>
+                  <button v-if="ownership" @click="deleteSong(song.id)">Delete</button>
               </div>
             <CreateSong v-if="ownership" :playlist="playlist"/>
          </div>
@@ -25,21 +25,40 @@
 
 <script>
 import getRealtimeData from '@/composables/getRealtimeData'
+import useDocument from '@/composables/useDocument'
 import getUser from '@/composables/getUser'
 import { computed } from 'vue'
 import CreateSong from '@/components/CreateSong.vue'
+import Storage from '@/composables/Storage'
+import { useRouter } from 'vue-router'
+
 export default {
     props:['id'],
     components: {CreateSong},
     setup(props){
         const {error, document: playlist} = getRealtimeData('playlist',props.id)
         const { user } = getUser()
-        console.log(user)
+        const { deleteDoc,updateDoc } = useDocument('playlist',props.id)
+        const { deleteImage } = Storage()
+        const router = useRouter()
+
         const ownership = computed(() => {
             return playlist.value && user.value && user.value.uid == playlist.value.userId
         })
 
-        return {error, playlist,ownership}
+        const deletePlaylist = async () => {
+            await deleteDoc()
+            await deleteImage(playlist.value.filePath)
+            router.push({name:'Index'})
+        }
+
+        
+        const deleteSong = async (id) => {
+            const songs = playlist.value.songs.filter((song) => song.id != id)
+            await updateDoc({ songs })
+        }
+
+        return {error, playlist,ownership,deletePlaylist,deleteSong}
     }
 }
 </script>

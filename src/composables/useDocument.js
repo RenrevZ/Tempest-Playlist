@@ -7,7 +7,7 @@ const useDocument = (collection,id) => {
 
     let docRef = projectFirestore.collection(collection).doc(id)
 
-    const deleteDoc = async () => {
+    const deleteDoc = async () => {  
         isLoading.value = false
         error.value = null
 
