@@ -7,11 +7,11 @@
 
           <div v-if="user">
             <router-link :to="{name:'Index'}">
-              Playlist
+              <img src="@/assets/img/290128_audio_media_music_play_player_icon.png" class="nav-icon"/> Playlist
             </router-link>
 
             <router-link :to="{name:'Createplaylist'}">
-              Create Playlist
+              <img src="@/assets/img/asdasd.png" class="nav-icon"/> Create Playlist
             </router-link>
 
             <router-link :to="{name:'UserPlaylist'}">

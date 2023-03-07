@@ -8,14 +8,19 @@
             <h2>{{ playlist.title }}</h2>
             <small>Created by {{ playlist.userName }}</small>
             <p>{{ playlist.description }}</p>
-            <button v-if="ownership" @click="deletePlaylist">Delete Playlist</button>
+            <button v-if="ownership" @click="deletePlaylist" class="deletebtn">Delete Playlist</button>
         </div>
 
          <div class="song-list">
            <div v-if="!playlist.songs.length">No songs has been added in this playlist yet</div>
               <div v-for="song in playlist.songs" :key="song.id" class="single-song">
+                <div class="song-title">
+                  <small>Title</small>
                   <h3>{{ song.title }}</h3>
+                </div>
+                  
                   <small>{{ song.artist }}</small>
+                  
                   <button v-if="ownership" @click="deleteSong(song.id)">Delete</button>
               </div>
             <CreateSong v-if="ownership" :playlist="playlist"/>
@@ -104,11 +109,12 @@ export default {
   }
 
   .single-song{
-    padding: 10px 0px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px dashed var(--secondary);
+    border-bottom:1px solid #333;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
     margin-bottom: 20px;
   }
 </style>

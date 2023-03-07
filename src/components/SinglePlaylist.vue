@@ -10,7 +10,7 @@
                 <p>Created by {{ playlist.userName }}</p>
             </div>
             <div class="playlist-number">
-                <p>{{ playlist.songs.length }}</p>
+                <p>{{ playlist.songs.length }} songs</p>
             </div>
         </div>
     </router-link>
@@ -28,6 +28,7 @@ export default {
     display: flex;
     align-items: center;
     padding:20px;
+    border:1px solid rgba(0,0,0,0.05);
     border-radius: 10px;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.05);
     background: white;
