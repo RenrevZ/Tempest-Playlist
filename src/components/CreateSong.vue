@@ -28,7 +28,7 @@ export default {
         const title = ref('')
         const artist = ref('')
         const showform = ref(false)
-        const {updateDoc } = useDocument('playlist',props.playlist.id)
+        const {updateDoc} = useDocument('playlist',props.playlist.id)
 
         const submitForm = async () => {
             const newSong = {

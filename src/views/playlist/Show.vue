@@ -69,6 +69,14 @@ export default {
 </script>
 
 <style>
+@media screen and (max-width: 620px) {
+  .playlist-details{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
  .playlist-details {
     display: grid;
     grid-template-columns: 1fr 2fr;

@@ -2,7 +2,7 @@
   <div class="navbar">
     <nav>
         <img src="@/assets/img/de11579517e467cd83793e0ec8c358e1.png" alt="">
-        <h1><router-link :to="{name:'home'}">Rimiru Playlist</router-link></h1>
+        <h1 class="title"><router-link :to="{name:'home'}">Rimiru Playlist</router-link></h1>
         <div class="links">
 
           <div v-if="user">
@@ -52,6 +52,11 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 620px) {
+  .title{
+    display: none;
+  }
+}
 .navbar{
   padding: 16px 10px;
   margin-bottom: 60px;

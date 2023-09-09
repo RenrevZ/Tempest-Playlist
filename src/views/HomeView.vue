@@ -14,6 +14,14 @@ export default {
 </script>
 
 <style>
+@media screen and (max-width: 620px) {
+  .home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+  }
+}
 .cover{
   max-height: 500px;
 }

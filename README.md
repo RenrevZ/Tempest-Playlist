@@ -1,19 +1,6 @@
-# tempest-playlist-vue
+# Tempest Playlist
+- A playlist creator build with Vue js and Firebase
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Sample Screenshot
+<img src="screenshot/rimiru playlist.png">
+<img src="screenshot/playlist.png">
